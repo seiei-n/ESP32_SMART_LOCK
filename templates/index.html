@@ -4,23 +4,21 @@
         <meta charset="UTF-8" />
     </head>
     <body>
-        <button type="button" id="open">OPEN</button>
-        <button type="button" id="close">CLOSE</button>
+        <button type="button" id="open" onclick="post_open()">OPEN</button>
+        <button type="button" id="close" onclick="post_close()">CLOSE</button>
 
         <script>
-            document
+            /*document
                 .getElementById("open")
-                .addEventListener("click", post_open);
+                .addEventListener("click", post_open); */
             function post_open() {
                 fetch("/open", {
                     method: "POST",
                 });
-
-            
             }
-            document
+            /*document
                 .getElementById("close")
-                .addEventListener("click", post_close);
+                .addEventListener("click", post_close); */
             function post_close() {
                 fetch("/close", {
                     method: "POST",
