@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <button type="button" id="open">OPEN</button>
+        <button type="button" id="close">CLOSE</button>
+
+        <script>
+            document
+                .getElementById("open")
+                .addEventListener("click", post_open);
+            function post_open() {
+                fetch("/open", {
+                    method: "POST",
+                });
+
+            
+            }
+            document
+                .getElementById("close")
+                .addEventListener("click", post_close);
+            function post_close() {
+                fetch("/close", {
+                    method: "POST",
+                });
+            }
+        </script>
+    </body>
+</html>
