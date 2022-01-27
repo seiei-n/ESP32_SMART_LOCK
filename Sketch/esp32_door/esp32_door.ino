@@ -46,11 +46,11 @@ void loop() {
    else if (Serial.available()>0){
     input = Serial.read();
     if(input == '1'){
-      Serial.println("Open!");
+    
       open();
       }
     else if (input == '2'){
-      Serial.println("Close!");
+     
       close();
       }
    }
