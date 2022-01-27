@@ -21,7 +21,7 @@ void close(){
   }
 void setup() {
   servo.attach(SERVO);  // サーボモーターの制御ピン設定
-  SerialBT.begin("ESP32");
+  
   Serial.begin(115200);
   SerialBT.println("OK!!");
   
