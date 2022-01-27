@@ -17,6 +17,7 @@ def open():
     if request.method == 'POST':
 
         ser.write(bytes('1', 'utf-8'))
+        print(ser.read_all())
 
         return index()
 
@@ -26,6 +27,7 @@ def close():
     if request.method == 'POST':
 
         ser.write(bytes('2', 'utf-8'))
+        print(ser.read_all())
 
         return index()
 
