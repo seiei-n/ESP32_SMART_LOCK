@@ -21,7 +21,7 @@ void close(){
   }
 void setup() {
   servo.attach(SERVO);  // サーボモーターの制御ピン設定
-  
+  SerialBT.begin(ESP32);
   Serial.begin(115200);
   SerialBT.println("OK!!");
   
@@ -46,9 +46,11 @@ void loop() {
    else if (Serial.available()>0){
     input = Serial.read();
     if(input == '1'){
+      Serial.println("Open!");
       open();
       }
     else if (input == '2'){
+      Serial.println("Close!");
       close();
       }
    }
