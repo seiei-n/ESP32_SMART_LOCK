@@ -1,14 +1,14 @@
 
 
 #include <ESP32Servo.h>
-#include <BluetoothSerial.h>
+#include "BluetoothSerial.h"
 #include <WiFi.h>
-#include <HTTPClinet.h>
+#include <WiFiClient.h>
 const char SSID[] = "server";
 const char PASSWORD[] = "solehamugoiyo";
 const char URL[] = "http://127.0.0.1:8000/data";
 
-
+WiFiServer server(80);
 BluetoothSerial SerialBT;
 
 const int SERVO = 12; // サーボモーターピン
@@ -49,6 +49,14 @@ void loop()
   HTTPClient http;
   http.begin(URL);
   int httpCode = http.GET();
+  Serial.printf("Response: %d", httpCode);
+  Serial.println();
+  if (httpCode == "Open"){
+    open();
+  }
+  else if (httpCode == "Close"){
+    close();
+  }
 
   if (Serial.available() > 0)
   {
