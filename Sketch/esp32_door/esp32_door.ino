@@ -1,12 +1,16 @@
+//#include <HTTPClient.h>
+
+//#include <dummy.h>
+
 
 
 #include <ESP32Servo.h>
 #include <BluetoothSerial.h>
-#include <WiFi.h>
-#include <HTTPClinet.h>
-const char SSID[] = "server";
-const char PASSWORD[] = "solehamugoiyo";
-const char URL[] = "http://127.0.0.1:8000/data";
+//#include <WiFi.h>
+
+//const char SSID[] = "server";
+//const char PASSWORD[] = "solehamugoiyo";
+//const char URL[] = "http://127.0.0.1:8000/data";
 
 
 BluetoothSerial SerialBT;
@@ -18,37 +22,41 @@ Servo servo; // サーボクラス
 
 void open()
 {
-  servo.write(90);
+  servo.attach(SERVO);
+  servo.write(180);
   delay(500);
+  servo.detach();
 }
 void close()
 {
-  servo.write(180);
+  servo.attach(SERVO);
+  servo.write(90);
   delay(500);
+  servo.detach();
 }
 void setup()
 {
   pinMode(14, OUTPUT);
-  servo.attach(SERVO); // サーボモーターの制御ピン設定
+   // サーボモーターの制御ピン設定
   SerialBT.begin(ESP32);
   Serial.begin(115200);
   SerialBT.println("OK!!");
-  while (!Serial);
-  WiFi.begin(SSID, PASSWORD);
+ // while (!Serial);
+//  WiFi.begin(SSID, PASSWORD);
   Serial.print("WiFi connecting");
-  while (WiFi.status() != WL_CONNECTED){
-    Serial.print(".");
-    delay(100);
-  }
+ // while (WiFi.status() != WL_CONNECTED){
+ //   Serial.print(".");
+ //   delay(100);
+ // }
 
-  Serial.println(" connected");
+//  Serial.println(" connected");
 }
 
 void loop()
 {
-  HTTPClient http;
-  http.begin(URL);
-  int httpCode = http.GET();
+//  HTTPClient http;
+ // http.begin(URL);
+ // int httpCode = http.GET();
 
   if (Serial.available() > 0)
   {

@@ -20,7 +20,7 @@ def open():
     if request.method == 'POST':
 
         
-        ser.write(bytes('1', 'utf-8'))
+        # ser.write(bytes('1', 'utf-8'))
        
         return index()
 

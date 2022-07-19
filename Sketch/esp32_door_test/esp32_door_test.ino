@@ -1,9 +1,9 @@
-
-
 #include <ESP32Servo.h>
 #include "BluetoothSerial.h"
-#include <WiFi.h>
-#include <WiFiClient.h>
+#include <ESP32WiFi.h>
+// #include <WiFi.h>
+// #include <HTTPClient.h>
+// #include <WiFiClient.h>
 const char SSID[] = "server";
 const char PASSWORD[] = "solehamugoiyo";
 const char URL[] = "http://127.0.0.1:8000/data";
@@ -18,18 +18,22 @@ Servo servo; // サーボクラス
 
 void open()
 {
-  servo.write(90);
+  servo.attach(SERVO);
+  servo.write(180);
   delay(500);
+  servo.detach();
 }
 void close()
 {
-  servo.write(180);
+  servo.attach(SERVO);
+  servo.write(90);
   delay(500);
+  servo.detach();
 }
+
 void setup()
 {
   pinMode(14, OUTPUT);
-  servo.attach(SERVO); // サーボモーターの制御ピン設定
   SerialBT.begin(ESP32);
   Serial.begin(115200);
   SerialBT.println("OK!!");
@@ -66,13 +70,11 @@ void loop()
       Serial.println("Open!");
       digitalWrite(14, HIGH);
       delay(500);
-
       open();
     }
     else if (input == '2')
     {
       Serial.println("Close!");
-
       digitalWrite(14, LOW);
       delay(500);
       close();
