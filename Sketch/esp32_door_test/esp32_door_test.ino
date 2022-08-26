@@ -1,9 +1,8 @@
 #include <ESP32Servo.h>
 #include "BluetoothSerial.h"
-#include <ESP32WiFi.h>
-// #include <WiFi.h>
-// #include <HTTPClient.h>
-// #include <WiFiClient.h>
+#include "WiFi.h"
+#include "HTTPClient.h"
+#include "WiFiClient.h"
 const char SSID[] = "server";
 const char PASSWORD[] = "solehamugoiyo";
 const char URL[] = "http://127.0.0.1:8000/data";
@@ -34,13 +33,15 @@ void close()
 void setup()
 {
   pinMode(14, OUTPUT);
-  SerialBT.begin(ESP32);
+  SerialBT.begin("ESP32");
   Serial.begin(115200);
   SerialBT.println("OK!!");
-  while (!Serial);
+  while (!Serial)
+    ;
   WiFi.begin(SSID, PASSWORD);
   Serial.print("WiFi connecting");
-  while (WiFi.status() != WL_CONNECTED){
+  while (WiFi.status() != WL_CONNECTED)
+  {
     Serial.print(".");
     delay(100);
   }
@@ -55,10 +56,12 @@ void loop()
   int httpCode = http.GET();
   Serial.printf("Response: %d", httpCode);
   Serial.println();
-  if (httpCode == "Open"){
+  if (httpCode == "Open")
+  {
     open();
   }
-  else if (httpCode == "Close"){
+  else if (httpCode == "Close")
+  {
     close();
   }
 

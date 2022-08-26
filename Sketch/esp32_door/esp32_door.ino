@@ -38,7 +38,7 @@ void setup()
 {
   pinMode(14, OUTPUT);
    // サーボモーターの制御ピン設定
-  SerialBT.begin(ESP32);
+  SerialBT.begin("ESP32");
   Serial.begin(115200);
   SerialBT.println("OK!!");
  // while (!Serial);
