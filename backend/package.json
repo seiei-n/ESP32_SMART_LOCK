@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@abandonware/noble": "^1.9.2-15",
+    "node-switchbot": "^1.4.0"
+  }
+}
