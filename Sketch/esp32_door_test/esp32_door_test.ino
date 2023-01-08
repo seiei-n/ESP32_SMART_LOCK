@@ -4,8 +4,8 @@
 // #include <WiFi.h>
 // #include <HTTPClient.h>
 // #include <WiFiClient.h>
-const char SSID[] = "server";
-const char PASSWORD[] = "solehamugoiyo";
+const char SSID[] = "";
+const char PASSWORD[] = "";
 const char URL[] = "http://127.0.0.1:8000/data";
 
 WiFiServer server(80);

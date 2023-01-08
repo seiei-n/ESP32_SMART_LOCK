@@ -1,17 +1,5 @@
-//#include <HTTPClient.h>
-
-//#include <dummy.h>
-
-
-
 #include <ESP32Servo.h>
 #include <BluetoothSerial.h>
-//#include <WiFi.h>
-
-//const char SSID[] = "server";
-//const char PASSWORD[] = "solehamugoiyo";
-//const char URL[] = "http://127.0.0.1:8000/data";
-
 
 BluetoothSerial SerialBT;
 
@@ -19,7 +7,7 @@ const int SERVO = 12; // サーボモーターピン
 char input;
 
 Servo servo; // サーボクラス
-
+RTC_DATA_ATTR int bootCount = 0;
 void open()
 {
   servo.attach(SERVO);
@@ -41,22 +29,13 @@ void setup()
   SerialBT.begin(ESP32);
   Serial.begin(115200);
   SerialBT.println("OK!!");
- // while (!Serial);
-//  WiFi.begin(SSID, PASSWORD);
-  Serial.print("WiFi connecting");
- // while (WiFi.status() != WL_CONNECTED){
- //   Serial.print(".");
- //   delay(100);
- // }
-
-//  Serial.println(" connected");
+  esp_sleep_enable_ext0_wakeup(GPIO_NUM_15,1);
+ 
 }
 
 void loop()
 {
-//  HTTPClient http;
- // http.begin(URL);
- // int httpCode = http.GET();
+
 
   if (Serial.available() > 0)
   {
