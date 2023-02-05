@@ -22,39 +22,68 @@ void close()
   delay(500);
   servo.detach();
 }
+void deep_sleep()
+{
+  esp_sleep_enable_ext0_wakeup(GPIO_NUM_15,1);
+  esp_deep_sleep_start();
+}
+
 void setup()
 {
-  pinMode(14, OUTPUT);
-   // サーボモーターの制御ピン設定
-  SerialBT.begin(ESP32);
+  pinMode(GPIO_NUM_15, INPUT_PULLUP);
+  SerialBT.begin("ESP32");
   Serial.begin(115200);
-  SerialBT.println("OK!!");
-  esp_sleep_enable_ext0_wakeup(GPIO_NUM_15,1);
+  Serial.print("OK!!");
+  delay(5000);
+  if (SerialBT.available() > 0)
+  {  
+    input = SerialBT.read();
+    if (input == '1')
+    {
+      SerialBT.print("Open!");
+      Serial.print("Open!");
+      delay(500);
+      open();
+    }
+    else if (input == '2')
+    {
+      SerialBT.print("Close!");
+      Serial.print("Close!")
+      delay(500);
+      close();
+    }
+  }
+  SerialBT.print("Going to sleep now");
+  Serial.print("Going to sleep now");
+  deep_sleep();
+  
  
 }
 
 void loop()
 {
+  // esp_sleep_enable_ext0_wakeup(GPIO_NUM_15,1);
+  // delay(10000);
+  // if (SerialBT.available() > 0)
+  // {  
+  //   input = SerialBT.read();
+  //   if (input == '1')
+  //   {
+  //     SerialBT.print("Open!");
+  //     delay(500);
+  //     open();
+  //   }
+  //   else if (input == '2')
+  //   {
+  //     SerialBT.print("Close!");
+  //     delay(500);
+  //     close();
+  //   }
+  // }
+  // SerialBT.print("Going to sleep now");
+  // Serial.print("Going to sleep now");
+  // esp_deep_sleep_start();
 
-
-  if (Serial.available() > 0)
-  {
-    input = Serial.read();
-    if (input == '1')
-    {
-      Serial.println("Open!");
-      digitalWrite(14, HIGH);
-      delay(500);
-
-      open();
-    }
-    else if (input == '2')
-    {
-      Serial.println("Close!");
-
-      digitalWrite(14, LOW);
-      delay(500);
-      close();
-    }
-  }
+  
+ 
 }
